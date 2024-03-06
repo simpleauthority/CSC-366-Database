@@ -1,4 +1,4 @@
-package main.java.edu.calpoly.csc366.teamdatabase;
+package edu.calpoly.csc366.teamdatabase.owner_boardDirector;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
