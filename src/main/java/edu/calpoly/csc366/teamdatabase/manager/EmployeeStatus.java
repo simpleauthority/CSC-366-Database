@@ -12,17 +12,21 @@ public class EmployeeStatus {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int statusId;
     private int employeeId;
+    @Temporal(TemporalType.DATE)
     private Date hireDate;
+    @Temporal(TemporalType.DATE)
     private Date termDate;
-    private int storeId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "storeId", nullable = false)
+    private Store store;
     public EmployeeStatus() {}
 
-    public EmployeeStatus(int statusId, int employeeId, Date hireDate, Date termDate, int storeId) {
+    public EmployeeStatus(int statusId, int employeeId, Date hireDate, Date termDate, int storeId, Store store) {
         this.statusId = statusId;
         this.employeeId = employeeId;
         this.hireDate = hireDate;
         this.termDate = termDate;
-        this.storeId = storeId;
+        this.store = store;
     }
 
     public int getStatusId() {
@@ -57,14 +61,6 @@ public class EmployeeStatus {
         this.termDate = termDate;
     }
 
-    public int getStoreId() {
-        return storeId;
-    }
-
-    public void setStoreId(int storeId) {
-        this.storeId = storeId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -85,7 +81,6 @@ public class EmployeeStatus {
                 ", employeeId=" + employeeId +
                 ", hireDate=" + hireDate +
                 ", termDate=" + termDate +
-                ", storeId=" + storeId +
                 '}';
     }
 }

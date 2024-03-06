@@ -6,30 +6,32 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "rent")
 public class CustomerFeedback {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int feedbackId;
-    private int storeId;
     private int customerId;
     private polarity polarity;
     private String comment;
+    @Temporal(TemporalType.DATE)
     private Date date;
-
     public enum polarity {
         POSITIVE,
         NEGATIVE
     }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "storeId", nullable = false)
+    private Store store;
+
     public CustomerFeedback () {}
-    public CustomerFeedback(int feedbackId, int storeId, int customerId, CustomerFeedback.polarity polarity, String comment, Date date) {
+    public CustomerFeedback(int feedbackId, int customerId, CustomerFeedback.polarity polarity, String comment, Date date, Store store) {
         this.feedbackId = feedbackId;
-        this.storeId = storeId;
         this.customerId = customerId;
         this.polarity = polarity;
         this.comment = comment;
         this.date = date;
+        this.store = store;
     }
 
     public int getFeedbackId() {
@@ -38,14 +40,6 @@ public class CustomerFeedback {
 
     public void setFeedbackId(int feedbackId) {
         this.feedbackId = feedbackId;
-    }
-
-    public int getStoreId() {
-        return storeId;
-    }
-
-    public void setStoreId(int storeId) {
-        this.storeId = storeId;
     }
 
     public int getCustomerId() {
@@ -97,7 +91,6 @@ public class CustomerFeedback {
     public String toString() {
         return "CustomerFeedback{" +
                 "feedbackId=" + feedbackId +
-                ", storeId=" + storeId +
                 ", customerId=" + customerId +
                 ", polarity=" + polarity +
                 ", comment='" + comment + '\'' +

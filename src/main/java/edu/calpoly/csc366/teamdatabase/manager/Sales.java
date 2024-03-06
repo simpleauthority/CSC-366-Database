@@ -12,21 +12,25 @@ public class Sales {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int saleId;
-    private int storeId;
     private int productId;
     private int quantitySold;
+    @Temporal(TemporalType.DATE)
     private Date saleDate;
     private int totalSaleAmount;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "storeId", nullable = false)
+    private Store store;
+
     public Sales () {}
 
-    public Sales(int saleId, int storeId, int productId, int quantitySold, Date saleDate, int totalSaleAmount) {
+    public Sales(int saleId, int storeId, int productId, int quantitySold, Date saleDate, int totalSaleAmount, Store store) {
         this.saleId = saleId;
-        this.storeId = storeId;
         this.productId = productId;
         this.quantitySold = quantitySold;
         this.saleDate = saleDate;
         this.totalSaleAmount = totalSaleAmount;
+        this.store = store;
     }
 
     public int getSaleId() {
@@ -35,14 +39,6 @@ public class Sales {
 
     public void setSaleId(int saleId) {
         this.saleId = saleId;
-    }
-
-    public int getStoreId() {
-        return storeId;
-    }
-
-    public void setStoreId(int storeId) {
-        this.storeId = storeId;
     }
 
     public int getProductId() {
@@ -94,7 +90,6 @@ public class Sales {
     public String toString() {
         return "Sales{" +
                 "saleId=" + saleId +
-                ", storeId=" + storeId +
                 ", productId=" + productId +
                 ", quantitySold=" + quantitySold +
                 ", saleDate=" + saleDate +

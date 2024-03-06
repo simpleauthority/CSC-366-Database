@@ -12,16 +12,22 @@ public class Maintence {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int serviceId;
+    @Temporal(TemporalType.DATE)
     private Date date;
     private String description;
     private String provider;
     private float cost;
+    @Temporal(TemporalType.DATE)
     private Date dueDate;
+    @Temporal(TemporalType.DATE)
     private Date paymentDate;
     private String Note;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "storeId", nullable = false)
+    private Store store;
     public Maintence() {}
 
-    public Maintence(int serviceId, Date date, String description, String provider, float cost, Date dueDate, Date paymentDate, String note) {
+    public Maintence(int serviceId, Date date, String description, String provider, float cost, Date dueDate, Date paymentDate, String note, Store store) {
         this.serviceId = serviceId;
         this.date = date;
         this.description = description;
@@ -30,6 +36,7 @@ public class Maintence {
         this.dueDate = dueDate;
         this.paymentDate = paymentDate;
         Note = note;
+        this.store = store;
     }
 
     public int getServiceId() {

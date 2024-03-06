@@ -1,5 +1,9 @@
 package edu.calpoly.csc366.teamdatabase.manager;
 
+import java.util.List;
+import java.util.ArrayList;
+
+import edu.calpoly.csc366.teamdatabase.employee.Position;
 import jakarta.persistence.*;
 
 import java.util.Objects;
@@ -15,7 +19,9 @@ public class Manager {
     private String email;
     private String phoneNumber;
     private String address;
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "storeId", nullable = false)
+    private Store store;
     public Manager() {
 
     }

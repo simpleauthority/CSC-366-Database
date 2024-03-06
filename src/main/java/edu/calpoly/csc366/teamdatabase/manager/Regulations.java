@@ -4,11 +4,16 @@ import jakarta.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
 
+@Entity
 public class Regulations {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int regulationId;
     private String title;
     private Regs regulations;
+    @Temporal(TemporalType.DATE)
     private Date effectiveDate;
+    @Temporal(TemporalType.DATE)
     private Date lastUpdated;
 
     public enum Regs {
@@ -18,6 +23,8 @@ public class Regulations {
         CONSUMER,
         INDUSTRY
     }
+
+
     public Regulations() {}
     public Regulations(int regulationId, String title, Regs regulations, Date effectiveDate, Date lastUpdated) {
         this.regulationId = regulationId;

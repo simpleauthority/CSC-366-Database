@@ -10,35 +10,27 @@ import java.util.Objects;
 public class StoreRegulation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int storeId;
-    private int regulationId;
+    private int storeRegulationsId;
     private Date date;
     private boolean current;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "storeId", nullable = false)
+    private Store store;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "regulationId", nullable = false)
+    private Regulations regulations;
 
     public StoreRegulation() {
 
     }
-    public StoreRegulation(int storeId, int regulationId, Date date, boolean current) {
-        this.storeId = storeId;
-        this.regulationId = regulationId;
+    public StoreRegulation(int storeRegulationsId, Date date, boolean current, Store store, Regulations regulations) {
+        this.storeRegulationsId = storeRegulationsId;
         this.date = date;
         this.current = current;
-    }
-
-    public int getStoreId() {
-        return storeId;
-    }
-
-    public void setStoreId(int storeId) {
-        this.storeId = storeId;
-    }
-
-    public int getRegulationId() {
-        return regulationId;
-    }
-
-    public void setRegulationId(int regulationId) {
-        this.regulationId = regulationId;
+        this.store = store;
+        this.regulations = regulations;
     }
 
     public Date getDate() {
@@ -57,24 +49,10 @@ public class StoreRegulation {
         this.current = current;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        StoreRegulation that = (StoreRegulation) o;
-        return storeId == that.storeId;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(storeId);
-    }
 
     @Override
     public String toString() {
         return "StoreRegulation{" +
-                "storeId=" + storeId +
-                ", regulationId=" + regulationId +
                 ", date=" + date +
                 ", current=" + current +
                 '}';

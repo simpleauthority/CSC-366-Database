@@ -11,18 +11,22 @@ public class Inventory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int inventoryId;
-    private int storeId;
     private int productId;
     private int quantity;
     private int restockLevel;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "storeId", nullable = false)
+    private Store store;
+
     public Inventory() {}
 
-    public Inventory(int inventoryId, int storeId, int productId, int quantity, int restockLevel) {
+    public Inventory(int inventoryId, int productId, int quantity, int restockLevel, Store store) {
         this.inventoryId = inventoryId;
-        this.storeId = storeId;
         this.productId = productId;
         this.quantity = quantity;
         this.restockLevel = restockLevel;
+        this.store = store;
     }
 
     public int getInventoryId() {
@@ -31,14 +35,6 @@ public class Inventory {
 
     public void setInventoryId(int inventoryId) {
         this.inventoryId = inventoryId;
-    }
-
-    public int getStoreId() {
-        return storeId;
-    }
-
-    public void setStoreId(int storeId) {
-        this.storeId = storeId;
     }
 
     public int getProductId() {
@@ -82,7 +78,6 @@ public class Inventory {
     public String toString() {
         return "Inventory{" +
                 "inventoryId=" + inventoryId +
-                ", storeId=" + storeId +
                 ", productId=" + productId +
                 ", quantity=" + quantity +
                 ", restockLevel=" + restockLevel +

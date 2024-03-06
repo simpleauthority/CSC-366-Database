@@ -11,17 +11,18 @@ public class Store {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int storeId;
     private String address;
-    @Column(unique=true)
-    private int managerId;
     private int size;
     private int salesTarget;
     private String region;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "manager_id", nullable = false)
+    private Manager managerId;
     public Store() {}
 
-    public Store(int storeId, String address, int managerId, int size, int salesTarget, String region) {
+    public Store(int storeId, String address, int size, int salesTarget, String region) {
         this.storeId = storeId;
         this.address = address;
-        this.managerId = managerId;
         this.size = size;
         this.salesTarget = salesTarget;
         this.region = region;
@@ -41,14 +42,6 @@ public class Store {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public int getManagerId() {
-        return managerId;
-    }
-
-    public void setManagerId(int managerId) {
-        this.managerId = managerId;
     }
 
     public int getSize() {

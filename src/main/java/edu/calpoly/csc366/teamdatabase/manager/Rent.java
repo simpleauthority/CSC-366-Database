@@ -16,12 +16,18 @@ public class Rent {
     private String ExpenseType;
     private String Description;
     private float amount;
+    @Temporal(TemporalType.DATE)
     private Date dueDate;
+    @Temporal(TemporalType.DATE)
     private Date paymentDate;
     private String Note;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "storeId", nullable = false)
+    private Store store;
     public Rent() {}
 
-    public Rent(int rentId, int storeId, String expenseType, String description, float amount, Date dueDate, Date paymentDate, String note) {
+    public Rent(int rentId, int storeId, String expenseType, String description, float amount, Date dueDate, Date paymentDate, String note, Store store) {
         this.rentId = rentId;
         this.storeId = storeId;
         ExpenseType = expenseType;
@@ -30,6 +36,7 @@ public class Rent {
         this.dueDate = dueDate;
         this.paymentDate = paymentDate;
         Note = note;
+        this.store = store;
     }
 
     public int getRentId() {
