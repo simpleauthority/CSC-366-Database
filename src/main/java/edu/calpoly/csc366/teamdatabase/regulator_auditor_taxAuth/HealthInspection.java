@@ -1,8 +1,5 @@
 package edu.calpoly.csc366.teamdatabase.regulator_auditor_taxAuth;
 
-import java.util.Date;
-import java.util.Objects;
-
 import edu.calpoly.csc366.teamdatabase.manager.Store;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,59 +10,66 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
+import java.util.Date;
+import java.util.Objects;
+
 @Entity
 public class HealthInspection {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private int healthInspectionId;
-  
-  @ManyToOne
-  @JoinColumn(name="storeId")
-  private Store store;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int healthInspectionId;
 
-  @Temporal(TemporalType.DATE)
-  private Date date;
+    @ManyToOne
+    @JoinColumn(name = "storeId")
+    private Store store;
 
-  private String grade;
+    @Temporal(TemporalType.DATE)
+    private Date date;
 
-   public HealthInspection(int healthInspectionId, Store store, Date date, String grade) {
+    private String grade;
+
+    public HealthInspection(int healthInspectionId, Store store, Date date, String grade) {
         this.healthInspectionId = healthInspectionId;
         this.store = store;
         this.date = date;
         this.grade = grade;
     }
 
+    public HealthInspection() {
+
+    }
+
     public int getHealthInspectionId() {
-      return healthInspectionId;
+        return healthInspectionId;
     }
 
     public Date getDate() {
-      return date;
+        return date;
     }
 
     public void setDate(Date date) {
-      this.date = date;
+        this.date = date;
     }
 
     public String getGrade() {
-      return grade;
+        return grade;
     }
 
     public void setGrade(String grade) {
-      this.grade = grade;
+        this.grade = grade;
     }
-  
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         HealthInspection inspection = (HealthInspection) o;
-        return healthInspectionId == inspection.healthInspectionId 
-        && store.equals(inspection.store)
-        && Objects.equals(date, inspection.date)
-        && grade.equals(inspection.grade);
+        return healthInspectionId == inspection.healthInspectionId
+                && store.equals(inspection.store)
+                && Objects.equals(date, inspection.date)
+                && grade.equals(inspection.grade);
     }
 
     @Override

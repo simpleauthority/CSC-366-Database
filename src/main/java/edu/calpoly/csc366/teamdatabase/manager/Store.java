@@ -1,6 +1,13 @@
 package edu.calpoly.csc366.teamdatabase.manager;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 import java.util.Objects;
 
@@ -8,7 +15,7 @@ import java.util.Objects;
 @Table(name = "store")
 public class Store {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int storeId;
     private String address;
     private int size;
@@ -18,7 +25,9 @@ public class Store {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "manager_id", nullable = false)
     private Manager managerId;
-    public Store() {}
+
+    public Store() {
+    }
 
     public Store(int storeId, String address, int size, int salesTarget, String region) {
         this.storeId = storeId;

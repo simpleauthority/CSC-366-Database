@@ -1,6 +1,14 @@
 package edu.calpoly.csc366.teamdatabase.manager;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 import java.util.Date;
 import java.util.Objects;
@@ -16,15 +24,13 @@ public class CustomerFeedback {
     private String comment;
     @Temporal(TemporalType.DATE)
     private Date date;
-    public enum polarity {
-        POSITIVE,
-        NEGATIVE
-    }
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "storeId", nullable = false)
     private Store store;
 
-    public CustomerFeedback () {}
+    public CustomerFeedback() {
+    }
+
     public CustomerFeedback(int feedbackId, int customerId, CustomerFeedback.polarity polarity, String comment, Date date, Store store) {
         this.feedbackId = feedbackId;
         this.customerId = customerId;
@@ -96,5 +102,10 @@ public class CustomerFeedback {
                 ", comment='" + comment + '\'' +
                 ", date=" + date +
                 '}';
+    }
+
+    public enum polarity {
+        POSITIVE,
+        NEGATIVE
     }
 }

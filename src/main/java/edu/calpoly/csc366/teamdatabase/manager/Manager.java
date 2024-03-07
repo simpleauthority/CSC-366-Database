@@ -1,10 +1,13 @@
 package edu.calpoly.csc366.teamdatabase.manager;
 
-import java.util.List;
-import java.util.ArrayList;
-
-import edu.calpoly.csc366.teamdatabase.employee.Position;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 import java.util.Objects;
 
@@ -22,9 +25,11 @@ public class Manager {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "storeId", nullable = false)
     private Store store;
+
     public Manager() {
 
     }
+
     public Manager(int managerId, String firstName, String lastName, String email, String phoneNumber, String address) {
         this.managerId = managerId;
         this.firstName = firstName;

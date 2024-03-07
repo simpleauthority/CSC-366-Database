@@ -1,34 +1,34 @@
 package edu.calpoly.csc366.teamdatabase.supplier;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
+
+import java.io.Serializable;
 import java.util.HashSet;
-
-import javax.persistence.Column;
-import javax.persistence.ManyToOne;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.UniqueConstraint;
-
-import javax.validation.constraints.NotNull;
 
 @Entity                   // this class maps to a database table
 @Table(name = "nutritionFacts")  // (may be omitted for default table naming)
+@IdClass(NutritionFacts.NutritionFactsId.class)
 public class NutritionFacts {
-
     @ManyToMany(mappedBy = "productId")
     private HashSet<SuppliedProduct> product = new HashSet<>();
 
-	private String ingredient;
+    @Id
+    private String ingredient;
 
-	private Double quantity;
+    @Id
+    private Double quantity;
 
-	private String quantityUnit;
+    @Id
+    private String quantityUnit;
 
+    public static class NutritionFactsId implements Serializable {
+        private String ingredient;
+        private Double quantity;
+        private String quantityUnit;
+    }
 }

@@ -1,21 +1,15 @@
-package main.java.edu.calpoly.csc366.teamdatabase;
+package edu.calpoly.csc366.teamdatabase.owner_boardDirector;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.StringJoiner;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.validation.constraints.NotNull;
-import javax.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 public class ShareholderEngagement {
@@ -88,8 +82,7 @@ public class ShareholderEngagement {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ShareholderEngagement)) return false;
-        ShareholderEngagement that = (ShareholderEngagement) o;
+        if (!(o instanceof ShareholderEngagement that)) return false;
         return getEngagementID() == that.getEngagementID();
     }
 

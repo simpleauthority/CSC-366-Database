@@ -1,4 +1,4 @@
-package edu.calpoly.csc366.teamdatabase.employee;
+package edu.calpoly.csc366.teamdatabase.customer;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -6,7 +6,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
@@ -36,6 +35,10 @@ public class Offer {
         this.endDate = endDate;
         this.redeemed = redeemed;
         this.account = account;
+    }
+
+    public Offer() {
+
     }
 
     public int getOfferId() {

@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class TeamDatabaseApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TeamDatabaseApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(TeamDatabaseApplication.class, args);
+    }
 
 }

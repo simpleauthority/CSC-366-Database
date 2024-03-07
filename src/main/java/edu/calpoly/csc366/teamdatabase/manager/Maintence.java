@@ -1,6 +1,15 @@
 package edu.calpoly.csc366.teamdatabase.manager;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 import java.util.Date;
 import java.util.Objects;
@@ -25,7 +34,9 @@ public class Maintence {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "storeId", nullable = false)
     private Store store;
-    public Maintence() {}
+
+    public Maintence() {
+    }
 
     public Maintence(int serviceId, Date date, String description, String provider, float cost, Date dueDate, Date paymentDate, String note, Store store) {
         this.serviceId = serviceId;

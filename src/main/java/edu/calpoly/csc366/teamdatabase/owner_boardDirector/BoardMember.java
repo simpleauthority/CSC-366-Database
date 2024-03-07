@@ -1,18 +1,14 @@
-package main.java.edu.calpoly.csc366.teamdatabase;
+package edu.calpoly.csc366.teamdatabase.owner_boardDirector;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.StringJoiner;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
-import javax.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 public class BoardMember {
@@ -104,8 +100,7 @@ public class BoardMember {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof BoardMember)) return false;
-        BoardMember that = (BoardMember) o;
+        if (!(o instanceof BoardMember that)) return false;
         return getBoardMemberID() == that.getBoardMemberID();
     }
 

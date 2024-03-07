@@ -1,5 +1,11 @@
 package edu.calpoly.csc366.teamdatabase.manager;
-import jakarta.persistence.*;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 import java.sql.Date;
 import java.util.Objects;
@@ -16,16 +22,10 @@ public class Regulations {
     @Temporal(TemporalType.DATE)
     private Date lastUpdated;
 
-    public enum Regs {
-        EMPLOYMENT,
-        ENVIRONMENTAL,
-        CORPORATE,
-        CONSUMER,
-        INDUSTRY
+    public Regulations() {
     }
 
 
-    public Regulations() {}
     public Regulations(int regulationId, String title, Regs regulations, Date effectiveDate, Date lastUpdated) {
         this.regulationId = regulationId;
         this.title = title;
@@ -96,5 +96,13 @@ public class Regulations {
                 ", effectiveDate=" + effectiveDate +
                 ", lastUpdated=" + lastUpdated +
                 '}';
+    }
+
+    public enum Regs {
+        EMPLOYMENT,
+        ENVIRONMENTAL,
+        CORPORATE,
+        CONSUMER,
+        INDUSTRY
     }
 }
