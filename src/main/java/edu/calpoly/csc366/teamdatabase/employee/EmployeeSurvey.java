@@ -12,7 +12,7 @@ import java.util.Date;
 @Entity
 public class EmployeeSurvey {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int surveyId;
     private String surveyTitle;
     private String surveyDescription;

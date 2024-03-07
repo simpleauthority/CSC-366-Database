@@ -13,7 +13,7 @@ import java.util.Objects;
 @Entity
 public class Regulations {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int regulationId;
     private String title;
     private Regs regulations;

@@ -21,7 +21,4 @@ public class SuppliedProduct {
     private String name;
 
     private String description;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    private Set<NutritionFacts> nutritionFacts = new HashSet<>();
 }

@@ -19,7 +19,7 @@ import java.util.Objects;
 public class Maintence {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int serviceId;
     @Temporal(TemporalType.DATE)
     private Date date;

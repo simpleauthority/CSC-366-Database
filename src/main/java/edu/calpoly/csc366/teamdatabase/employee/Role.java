@@ -6,10 +6,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Position {
+public class Role {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int positionId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int roleId;
 
     private String name;
 }

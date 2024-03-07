@@ -14,7 +14,7 @@ import java.util.Date;
 @Entity
 public class DisciplinaryRecord {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int recordId;
     @ManyToOne
     @JoinColumn(name = "employee_id")

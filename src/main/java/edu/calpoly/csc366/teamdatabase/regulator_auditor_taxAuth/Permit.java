@@ -17,7 +17,7 @@ import java.util.Objects;
 public class Permit {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int permitId;
 
     @ManyToOne

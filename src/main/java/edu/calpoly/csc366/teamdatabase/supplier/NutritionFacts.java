@@ -2,6 +2,8 @@ package edu.calpoly.csc366.teamdatabase.supplier;
 
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.ManyToMany;
@@ -9,26 +11,15 @@ import jakarta.persistence.Table;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Set;
 
-@Entity                   // this class maps to a database table
-@Table(name = "nutritionFacts")  // (may be omitted for default table naming)
-@IdClass(NutritionFacts.NutritionFactsId.class)
+@Entity
+@Table(name = "nutritionFacts")
 public class NutritionFacts {
-    @ManyToMany(mappedBy = "productId")
-    private HashSet<SuppliedProduct> product = new HashSet<>();
-
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY )
+    private int nutritionFactId;
     private String ingredient;
-
-    @Id
     private Double quantity;
-
-    @Id
     private String quantityUnit;
-
-    public static class NutritionFactsId implements Serializable {
-        private String ingredient;
-        private Double quantity;
-        private String quantityUnit;
-    }
 }

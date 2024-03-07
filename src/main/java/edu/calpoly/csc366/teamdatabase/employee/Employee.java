@@ -14,7 +14,7 @@ import java.util.Date;
 @Entity
 public class Employee {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int employeeId;
 
     private String name;
@@ -27,6 +27,6 @@ public class Employee {
     private Date dateOfBirth;
 
     @ManyToOne
-    @JoinColumn(name = "position_id")
-    private Position position;
+    @JoinColumn(name = "role_id")
+    private Role role;
 }

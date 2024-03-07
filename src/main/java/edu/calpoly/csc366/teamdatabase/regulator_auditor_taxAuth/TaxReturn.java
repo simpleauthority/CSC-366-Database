@@ -13,7 +13,7 @@ import java.util.Objects;
 @Entity
 public class TaxReturn {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int returnId;
 
     @Temporal(TemporalType.DATE)

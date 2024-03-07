@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  366_mariadb:
+    container_name: "366_mariadb"
+    image: "mariadb:11.2.2-jammy"
+    ports:
+      - "3306:3306"
+    networks:
+      - "default"
+    env_file:
+      - "./mariadb/.env"
+    volumes:
+      - "./mariadb/data/:/var/lib/mysql/:rw"
+      - "./mariadb/exports:/exports/"

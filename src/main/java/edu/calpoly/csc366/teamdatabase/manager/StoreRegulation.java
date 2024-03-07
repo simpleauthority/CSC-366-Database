@@ -15,7 +15,7 @@ import java.sql.Date;
 @Table(name = "StoreRegulation")
 public class StoreRegulation {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int storeRegulationsId;
     private Date date;
     private boolean current;

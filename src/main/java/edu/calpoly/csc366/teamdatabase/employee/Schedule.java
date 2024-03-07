@@ -14,7 +14,7 @@ import java.sql.Timestamp;
 @Entity
 public class Schedule {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int scheduleId;
     @ManyToOne
     @JoinColumn(name = "employee_id")

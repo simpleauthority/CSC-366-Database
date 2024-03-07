@@ -10,7 +10,7 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class StarbucksCard {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int starbucksCardId;
     private int balance;
     private boolean autoReload;

@@ -14,7 +14,7 @@ import java.util.Date;
 @Entity
 public class Offer {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int offerId;
     private String offerName;
     private String description;

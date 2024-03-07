@@ -17,7 +17,7 @@ import java.util.Objects;
 public class HealthInspection {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int healthInspectionId;
 
     @ManyToOne

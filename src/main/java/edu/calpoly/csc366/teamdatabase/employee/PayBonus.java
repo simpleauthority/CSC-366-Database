@@ -16,7 +16,7 @@ import java.util.Date;
 @Entity
 public class PayBonus {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int bonusId;
     @ManyToOne
     @JoinColumn(name = "employee_id")

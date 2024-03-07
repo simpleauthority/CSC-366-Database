@@ -11,7 +11,7 @@ import jakarta.persistence.OneToOne;
 @Entity
 public class CustomerAccount {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int accountId;
 
     private int starBalance;

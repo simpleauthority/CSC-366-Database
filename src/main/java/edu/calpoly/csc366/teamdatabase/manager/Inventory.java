@@ -15,7 +15,7 @@ import java.util.Objects;
 @Table(name = "Inventory")
 public class Inventory {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int inventoryId;
     private int productId;
     private int quantity;

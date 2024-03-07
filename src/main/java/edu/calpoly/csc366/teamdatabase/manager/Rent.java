@@ -16,11 +16,9 @@ import java.util.Date;
 @Entity
 @Table(name = "rent")
 public class Rent {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int rentId;
-    private int storeId;
     private String ExpenseType;
     private String Description;
     private float amount;
@@ -28,7 +26,7 @@ public class Rent {
     private Date dueDate;
     @Temporal(TemporalType.DATE)
     private Date paymentDate;
-    private String Note;
+    private String note;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "storeId", nullable = false)
@@ -37,15 +35,14 @@ public class Rent {
     public Rent() {
     }
 
-    public Rent(int rentId, int storeId, String expenseType, String description, float amount, Date dueDate, Date paymentDate, String note, Store store) {
+    public Rent(int rentId, String expenseType, String description, float amount, Date dueDate, Date paymentDate, String note, Store store) {
         this.rentId = rentId;
-        this.storeId = storeId;
         ExpenseType = expenseType;
         Description = description;
         this.amount = amount;
         this.dueDate = dueDate;
         this.paymentDate = paymentDate;
-        Note = note;
+        this.note = note;
         this.store = store;
     }
 
@@ -55,14 +52,6 @@ public class Rent {
 
     public void setRentId(int rentId) {
         this.rentId = rentId;
-    }
-
-    public int getStoreId() {
-        return storeId;
-    }
-
-    public void setStoreId(int storeId) {
-        this.storeId = storeId;
     }
 
     public String getExpenseType() {
@@ -106,10 +95,10 @@ public class Rent {
     }
 
     public String getNote() {
-        return Note;
+        return note;
     }
 
     public void setNote(String note) {
-        Note = note;
+        this.note = note;
     }
 }

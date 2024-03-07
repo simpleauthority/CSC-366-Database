@@ -19,7 +19,7 @@ import java.util.Objects;
 public class Sales {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int saleId;
     private int productId;
     private int quantitySold;

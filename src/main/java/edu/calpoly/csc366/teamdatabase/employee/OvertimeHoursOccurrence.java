@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 @Entity
 public class OvertimeHoursOccurrence {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int occurrenceId;
     @OneToOne
     @JoinColumn(name = "schedule_id")

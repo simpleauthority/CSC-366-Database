@@ -14,7 +14,7 @@ import java.util.Date;
 @Entity
 public class EmployeeRecognition {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int recognitionId;
     @ManyToOne
     @JoinColumn(name = "employee_id")

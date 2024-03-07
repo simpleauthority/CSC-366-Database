@@ -10,7 +10,7 @@ import jakarta.persistence.OneToOne;
 @Entity
 public class Message {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int messageId;
     @OneToOne
     @JoinColumn(name = "accountId")

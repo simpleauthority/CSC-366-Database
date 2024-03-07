@@ -35,7 +35,7 @@ public class SupplierContract {
     private Date expirationDate;
 
     public static class SupplierContractId implements Serializable {
-        private Long supplierId;
+        private Supplier supplier;
         private String contractName;
         private Date signDate;
         private Date expirationDate;

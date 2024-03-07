@@ -10,7 +10,7 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class SurveyResponse {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int responseId;
     @ManyToOne
     @JoinColumn(name = "survey_id")

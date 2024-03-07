@@ -12,7 +12,7 @@ import java.util.Date;
 @Entity
 public class CustomerPersonalInfo {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int customerInfoId;
     private String name;
     private String phone;

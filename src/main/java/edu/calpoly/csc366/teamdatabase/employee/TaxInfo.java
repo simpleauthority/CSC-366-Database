@@ -10,7 +10,7 @@ import jakarta.persistence.OneToOne;
 @Entity
 public class TaxInfo {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int taxInfoId;
     @OneToOne
     @JoinColumn(name = "employee_id")

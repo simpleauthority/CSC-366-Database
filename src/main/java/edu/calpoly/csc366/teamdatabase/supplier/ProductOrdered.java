@@ -11,9 +11,8 @@ import jakarta.persistence.UniqueConstraint;
 
 import java.io.Serializable;
 
-@Entity                   // this class maps to a database table
+@Entity
 @Table(name = "productOrdered", uniqueConstraints = @UniqueConstraint(columnNames = {"orderNumber", "productId"}))
-// (may be omitted for default table naming)
 @IdClass(ProductOrdered.ProductOrderedId.class)
 public class ProductOrdered {
     @Id
@@ -31,7 +30,7 @@ public class ProductOrdered {
     private String quantityUnit;
 
     public static class ProductOrderedId implements Serializable {
-        private Long orderNumber;
-        private Long productId;
+        private Shipment shipment;
+        private SuppliedProduct suppliedProduct;
     }
 }
