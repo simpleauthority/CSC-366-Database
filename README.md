@@ -10,14 +10,13 @@ Download Docker
 
 ## Step 2
 In `./devdb` Run the following
-
 ```console
-docker exec -it 366_mariadb /bin/bash
+docker-compose up -d
 ```
 
 Then run
 ```console
-docker-compose up
+docker exec -it 366_mariadb /bin/bash
 ```
 
 Then run:
