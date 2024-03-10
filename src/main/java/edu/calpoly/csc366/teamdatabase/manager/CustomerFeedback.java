@@ -36,13 +36,10 @@ public class CustomerFeedback {
     public CustomerFeedback() {
     }
 
-    public CustomerFeedback(int feedbackId, CustomerAccount customer, CustomerFeedback.polarity polarity, String comment, Date date, Store store) {
-        this.feedbackId = feedbackId;
-        this.customer = customer;
+    public CustomerFeedback(CustomerFeedback.polarity polarity, String comment, Date date) {
         this.polarity = polarity;
         this.comment = comment;
         this.date = date;
-        this.store = store;
     }
 
     public int getFeedbackId() {

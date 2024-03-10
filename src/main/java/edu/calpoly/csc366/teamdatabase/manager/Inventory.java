@@ -33,12 +33,10 @@ public class Inventory {
     public Inventory() {
     }
 
-    public Inventory(int inventoryId, SuppliedProduct product, int quantity, int restockLevel, Store store) {
-        this.inventoryId = inventoryId;
+    public Inventory(SuppliedProduct product, int quantity, int restockLevel) {
         this.product = product;
         this.quantity = quantity;
         this.restockLevel = restockLevel;
-        this.store = store;
     }
 
     public int getInventoryId() {

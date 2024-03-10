@@ -30,7 +30,7 @@ public class Manager {
 
     }
 
-    public Manager(int managerId, String firstName, String lastName, String email, String phoneNumber, String address) {
+    public Manager(String firstName, String lastName, String email, String phoneNumber, String address) {
         this.managerId = managerId;
         this.firstName = firstName;
         this.lastName = lastName;

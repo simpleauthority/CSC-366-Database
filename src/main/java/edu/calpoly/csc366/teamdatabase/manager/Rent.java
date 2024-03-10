@@ -35,15 +35,13 @@ public class Rent {
     public Rent() {
     }
 
-    public Rent(int rentId, String expenseType, String description, float amount, Date dueDate, Date paymentDate, String note, Store store) {
-        this.rentId = rentId;
+    public Rent(String expenseType, String description, float amount, Date dueDate, Date paymentDate, String note) {
         ExpenseType = expenseType;
         Description = description;
         this.amount = amount;
         this.dueDate = dueDate;
         this.paymentDate = paymentDate;
         this.note = note;
-        this.store = store;
     }
 
     public int getRentId() {

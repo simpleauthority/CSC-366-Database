@@ -32,12 +32,9 @@ public class StoreRegulation {
 
     }
 
-    public StoreRegulation(int storeRegulationsId, Date date, boolean current, Store store, Regulations regulations) {
-        this.storeRegulationsId = storeRegulationsId;
+    public StoreRegulation( Date date, boolean current) {
         this.date = date;
         this.current = current;
-        this.store = store;
-        this.regulations = regulations;
     }
 
     public Date getDate() {

@@ -26,8 +26,7 @@ public class Regulations {
     }
 
 
-    public Regulations(int regulationId, String title, Regs regulations, Date effectiveDate, Date lastUpdated) {
-        this.regulationId = regulationId;
+    public Regulations(String title, Regs regulations, Date effectiveDate, Date lastUpdated) {
         this.title = title;
         this.regulations = regulations;
         this.effectiveDate = effectiveDate;

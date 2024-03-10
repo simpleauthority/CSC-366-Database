@@ -35,12 +35,9 @@ public class EmployeeStatus {
     public EmployeeStatus() {
     }
 
-    public EmployeeStatus(int statusId, Employee employee, Date hireDate, Date termDate, Store store) {
-        this.statusId = statusId;
-        this.employee = employee;
+    public EmployeeStatus(Date hireDate, Date termDate) {
         this.hireDate = hireDate;
         this.termDate = termDate;
-        this.store = store;
     }
 
     public int getStatusId() {

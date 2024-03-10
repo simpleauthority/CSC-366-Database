@@ -29,8 +29,7 @@ public class Store {
     public Store() {
     }
 
-    public Store(int storeId, String address, int size, int salesTarget, String region) {
-        this.storeId = storeId;
+    public Store(String address, int size, int salesTarget, String region) {
         this.address = address;
         this.size = size;
         this.salesTarget = salesTarget;

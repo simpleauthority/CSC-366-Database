@@ -38,8 +38,7 @@ public class Maintenance {
     public Maintenance() {
     }
 
-    public Maintenance(int serviceId, Date date, String description, String provider, float cost, Date dueDate, Date paymentDate, String note, Store store) {
-        this.serviceId = serviceId;
+    public Maintenance(Date date, String description, String provider, float cost, Date dueDate, Date paymentDate, String note) {
         this.date = date;
         this.description = description;
         this.provider = provider;
@@ -47,7 +46,6 @@ public class Maintenance {
         this.dueDate = dueDate;
         this.paymentDate = paymentDate;
         Note = note;
-        this.store = store;
     }
 
     public int getServiceId() {

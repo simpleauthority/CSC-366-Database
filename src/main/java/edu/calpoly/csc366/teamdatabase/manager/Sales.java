@@ -38,13 +38,11 @@ public class Sales {
     public Sales() {
     }
 
-    public Sales(int saleId, int storeId, SuppliedProduct product, int quantitySold, Date saleDate, int totalSaleAmount, Store store) {
-        this.saleId = saleId;
+    public Sales(SuppliedProduct product, int quantitySold, Date saleDate, int totalSaleAmount) {
         this.product = product;
         this.quantitySold = quantitySold;
         this.saleDate = saleDate;
         this.totalSaleAmount = totalSaleAmount;
-        this.store = store;
     }
 
     public int getSaleId() {

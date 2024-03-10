@@ -27,4 +27,9 @@ public class SuppliedProduct {
     @ManyToOne
     @JoinColumn(name = "nutritionFactId")
     private NutritionFacts nutritionFacts;
+
+    public SuppliedProduct(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 }
