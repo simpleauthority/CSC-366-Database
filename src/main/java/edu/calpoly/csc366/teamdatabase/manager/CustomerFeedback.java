@@ -1,5 +1,6 @@
 package edu.calpoly.csc366.teamdatabase.manager;
 
+import edu.calpoly.csc366.teamdatabase.customer.CustomerAccount;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -7,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
@@ -19,7 +21,10 @@ public class CustomerFeedback {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int feedbackId;
-    private int customerId;
+
+    @OneToOne
+    @JoinColumn(name = "customerId", nullable = false)
+    private CustomerAccount customer;
     private polarity polarity;
     private String comment;
     @Temporal(TemporalType.DATE)
@@ -31,9 +36,9 @@ public class CustomerFeedback {
     public CustomerFeedback() {
     }
 
-    public CustomerFeedback(int feedbackId, int customerId, CustomerFeedback.polarity polarity, String comment, Date date, Store store) {
+    public CustomerFeedback(int feedbackId, CustomerAccount customer, CustomerFeedback.polarity polarity, String comment, Date date, Store store) {
         this.feedbackId = feedbackId;
-        this.customerId = customerId;
+        this.customer = customer;
         this.polarity = polarity;
         this.comment = comment;
         this.date = date;
@@ -48,12 +53,12 @@ public class CustomerFeedback {
         this.feedbackId = feedbackId;
     }
 
-    public int getCustomerId() {
-        return customerId;
+    public CustomerAccount getCustomer() {
+        return customer;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+    public void setCustomer(CustomerAccount customer) {
+        this.customer = customer;
     }
 
     public CustomerFeedback.polarity getPolarity() {
@@ -97,10 +102,11 @@ public class CustomerFeedback {
     public String toString() {
         return "CustomerFeedback{" +
                 "feedbackId=" + feedbackId +
-                ", customerId=" + customerId +
+                ", customer=" + customer +
                 ", polarity=" + polarity +
                 ", comment='" + comment + '\'' +
                 ", date=" + date +
+                ", store=" + store +
                 '}';
     }
 

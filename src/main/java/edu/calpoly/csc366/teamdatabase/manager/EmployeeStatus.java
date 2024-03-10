@@ -1,5 +1,6 @@
 package edu.calpoly.csc366.teamdatabase.manager;
 
+import edu.calpoly.csc366.teamdatabase.employee.Employee;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -20,7 +21,9 @@ public class EmployeeStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int statusId;
-    private int employeeId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "employeeId", nullable = false)
+    private Employee employee;
     @Temporal(TemporalType.DATE)
     private Date hireDate;
     @Temporal(TemporalType.DATE)
@@ -32,9 +35,9 @@ public class EmployeeStatus {
     public EmployeeStatus() {
     }
 
-    public EmployeeStatus(int statusId, int employeeId, Date hireDate, Date termDate, int storeId, Store store) {
+    public EmployeeStatus(int statusId, Employee employee, Date hireDate, Date termDate, Store store) {
         this.statusId = statusId;
-        this.employeeId = employeeId;
+        this.employee = employee;
         this.hireDate = hireDate;
         this.termDate = termDate;
         this.store = store;
@@ -48,12 +51,12 @@ public class EmployeeStatus {
         this.statusId = statusId;
     }
 
-    public int getEmployeeId() {
-        return employeeId;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setEmployeeId(int employeeId) {
-        this.employeeId = employeeId;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     public Date getHireDate() {
@@ -89,9 +92,10 @@ public class EmployeeStatus {
     public String toString() {
         return "EmployeeStatus{" +
                 "statusId=" + statusId +
-                ", employeeId=" + employeeId +
+                ", employee=" + employee +
                 ", hireDate=" + hireDate +
                 ", termDate=" + termDate +
+                ", store=" + store +
                 '}';
     }
 }

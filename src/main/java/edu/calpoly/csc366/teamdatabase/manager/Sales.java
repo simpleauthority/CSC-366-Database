@@ -1,5 +1,6 @@
 package edu.calpoly.csc366.teamdatabase.manager;
 
+import edu.calpoly.csc366.teamdatabase.supplier.SuppliedProduct;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -21,7 +22,10 @@ public class Sales {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int saleId;
-    private int productId;
+
+    @ManyToOne
+    @JoinColumn(name = "productId", nullable = false)
+    private SuppliedProduct product;
     private int quantitySold;
     @Temporal(TemporalType.DATE)
     private Date saleDate;
@@ -34,9 +38,9 @@ public class Sales {
     public Sales() {
     }
 
-    public Sales(int saleId, int storeId, int productId, int quantitySold, Date saleDate, int totalSaleAmount, Store store) {
+    public Sales(int saleId, int storeId, SuppliedProduct product, int quantitySold, Date saleDate, int totalSaleAmount, Store store) {
         this.saleId = saleId;
-        this.productId = productId;
+        this.product = product;
         this.quantitySold = quantitySold;
         this.saleDate = saleDate;
         this.totalSaleAmount = totalSaleAmount;
@@ -51,12 +55,12 @@ public class Sales {
         this.saleId = saleId;
     }
 
-    public int getProductId() {
-        return productId;
+    public SuppliedProduct getProduct() {
+        return product;
     }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
+    public void setProduct(SuppliedProduct product) {
+        this.product = product;
     }
 
     public int getQuantitySold() {
@@ -100,10 +104,11 @@ public class Sales {
     public String toString() {
         return "Sales{" +
                 "saleId=" + saleId +
-                ", productId=" + productId +
+                ", product=" + product +
                 ", quantitySold=" + quantitySold +
                 ", saleDate=" + saleDate +
                 ", totalSaleAmount=" + totalSaleAmount +
+                ", store=" + store +
                 '}';
     }
 }

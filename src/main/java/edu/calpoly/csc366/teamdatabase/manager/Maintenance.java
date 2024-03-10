@@ -16,7 +16,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "Maintence")
-public class Maintence {
+public class Maintenance {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,10 +35,10 @@ public class Maintence {
     @JoinColumn(name = "storeId", nullable = false)
     private Store store;
 
-    public Maintence() {
+    public Maintenance() {
     }
 
-    public Maintence(int serviceId, Date date, String description, String provider, float cost, Date dueDate, Date paymentDate, String note, Store store) {
+    public Maintenance(int serviceId, Date date, String description, String provider, float cost, Date dueDate, Date paymentDate, String note, Store store) {
         this.serviceId = serviceId;
         this.date = date;
         this.description = description;
@@ -118,7 +118,7 @@ public class Maintence {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Maintence maintence = (Maintence) o;
+        Maintenance maintence = (Maintenance) o;
         return serviceId == maintence.serviceId && Objects.equals(paymentDate, maintence.paymentDate) && Objects.equals(Note, maintence.Note);
     }
 

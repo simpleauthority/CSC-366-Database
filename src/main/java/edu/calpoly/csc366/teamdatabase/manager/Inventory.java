@@ -1,5 +1,6 @@
 package edu.calpoly.csc366.teamdatabase.manager;
 
+import edu.calpoly.csc366.teamdatabase.supplier.SuppliedProduct;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -7,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 import java.util.Objects;
@@ -17,7 +19,10 @@ public class Inventory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int inventoryId;
-    private int productId;
+
+    @OneToOne
+    @JoinColumn(name = "productId", nullable = false)
+    private SuppliedProduct product;
     private int quantity;
     private int restockLevel;
 
@@ -28,9 +33,9 @@ public class Inventory {
     public Inventory() {
     }
 
-    public Inventory(int inventoryId, int productId, int quantity, int restockLevel, Store store) {
+    public Inventory(int inventoryId, SuppliedProduct product, int quantity, int restockLevel, Store store) {
         this.inventoryId = inventoryId;
-        this.productId = productId;
+        this.product = product;
         this.quantity = quantity;
         this.restockLevel = restockLevel;
         this.store = store;
@@ -44,12 +49,12 @@ public class Inventory {
         this.inventoryId = inventoryId;
     }
 
-    public int getProductId() {
-        return productId;
+    public SuppliedProduct getProduct() {
+        return product;
     }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
+    public void setProduct(SuppliedProduct product) {
+        this.product = product;
     }
 
     public int getQuantity() {
@@ -85,9 +90,10 @@ public class Inventory {
     public String toString() {
         return "Inventory{" +
                 "inventoryId=" + inventoryId +
-                ", productId=" + productId +
+                ", product=" + product +
                 ", quantity=" + quantity +
                 ", restockLevel=" + restockLevel +
+                ", store=" + store +
                 '}';
     }
 }

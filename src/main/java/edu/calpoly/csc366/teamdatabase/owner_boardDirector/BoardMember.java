@@ -1,9 +1,12 @@
 package edu.calpoly.csc366.teamdatabase.owner_boardDirector;
 
+import edu.calpoly.csc366.teamdatabase.employee.Role;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
@@ -18,7 +21,9 @@ public class BoardMember {
 
     private String firstName;
     private String lastName;
-    private String role;
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
     @Temporal(TemporalType.DATE)
     private Date tenureStart;
     @Temporal(TemporalType.DATE)
@@ -30,7 +35,7 @@ public class BoardMember {
     }
 
     // Parameterized constructor
-    public BoardMember(String firstName, String lastName, String role, Date tenureStart, Date tenureEnd, String phone) {
+    public BoardMember(String firstName, String lastName, Role role, Date tenureStart, Date tenureEnd, String phone) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
@@ -64,11 +69,11 @@ public class BoardMember {
         this.lastName = lastName;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
