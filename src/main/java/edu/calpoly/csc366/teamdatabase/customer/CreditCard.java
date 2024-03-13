@@ -11,18 +11,30 @@ import jakarta.persistence.TemporalType;
 
 import java.util.Date;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import jakarta.persistence.Column;
+
 @Entity
 public class CreditCard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int creditCardId;
 
+    @NotNull
+    @Size(min=16, max=16)
+    @Column(unique=true)
     private int cardNumber;
+
+    @NotNull
+    @Size(min=3, max=4)
     private int cvv;
 
+    @NotNull
     @Temporal(value = TemporalType.DATE)
     private Date expirationDate;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "accountId")
     private CustomerAccount account;

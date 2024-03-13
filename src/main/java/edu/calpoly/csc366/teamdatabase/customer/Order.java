@@ -12,28 +12,42 @@ import jakarta.persistence.TemporalType;
 
 import java.util.Date;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Min;
+
+
 @Entity
-public class OrderHistory {
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int orderId;
+
+    @NotNull
     @Temporal(value = TemporalType.DATE)
     private Date date;
+
+    @NotNull
+    @Min(0)
+    private int price;
+
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "accountId")
     private CustomerAccount account;
+
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "productId")
     private SuppliedProduct product;
 
-    public OrderHistory(int orderId, Date date, CustomerAccount account, SuppliedProduct product) {
+    public Order(int orderId, Date date, CustomerAccount account, SuppliedProduct product) {
         this.orderId = orderId;
         this.date = date;
         this.account = account;
         this.product = product;
     }
 
-    public OrderHistory() {
+    public Order() {
     }
 
     public int getOrderId() {

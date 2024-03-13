@@ -7,22 +7,35 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 @Entity
 public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int messageId;
+
+    @NotNull
     @OneToOne
     @JoinColumn(name = "accountId")
-    private CustomerAccount account;
+    private CustomerAccount sender;
+    
+    @NotNull
+    @Size(min=1, max=100)
     private String title;
-    private String message;
 
-    public Message(int messageId, CustomerAccount account, String title, String message) {
+    @NotNull
+    @Size(min=1, max=500)
+    private String contents;
+
+    
+
+    public Message(int messageId, CustomerAccount sender, String title, String contents) {
         this.messageId = messageId;
-        this.account = account;
+        this.sender = sender;
         this.title = title;
-        this.message = message;
+        this.contents = contents;
     }
 
     public Message() {
@@ -37,12 +50,12 @@ public class Message {
         this.messageId = messageId;
     }
 
-    public CustomerAccount getAccount() {
-        return account;
+    public CustomerAccount getSender() {
+        return sender;
     }
 
-    public void setAccount(CustomerAccount account) {
-        this.account = account;
+    public void setSender(CustomerAccount sender) {
+        this.sender = sender;
     }
 
     public String getTitle() {
@@ -53,11 +66,11 @@ public class Message {
         this.title = title;
     }
 
-    public String getMessage() {
-        return message;
+    public String getContents() {
+        return contents;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setContents(String contents) {
+        this.contents = contents;
     }
 }

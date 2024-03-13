@@ -11,18 +11,33 @@ import jakarta.persistence.TemporalType;
 
 import java.util.Date;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 @Entity
 public class Offer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int offerId;
+
+    @NotNull
     private String offerName;
+
+    @NotNull
     private String description;
+
+    @NotNull
     @Temporal(value = TemporalType.DATE)
     private Date startDate;
+
+    @NotNull
     @Temporal(value = TemporalType.DATE)
     private Date endDate;
+
+    @NotNull
     private boolean redeemed;
+
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "accountId")
     private CustomerAccount account;

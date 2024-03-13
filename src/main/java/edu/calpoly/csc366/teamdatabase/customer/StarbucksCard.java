@@ -7,13 +7,23 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+
 @Entity
 public class StarbucksCard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int starbucksCardId;
+    
+    @NotNull
+    @Min(0)
     private int balance;
+
+    @NotNull
     private boolean autoReload;
+
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "accountId")
     private CustomerAccount account;

@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import jakarta.validation.constraints.NotNull;
+
 @Entity
 public class Preferences {
     @Id
@@ -12,17 +14,30 @@ public class Preferences {
     private int preferenceId;
 
     // Privacy Preferences
+    @NotNull
     private boolean personalizedAds;
+
+    @NotNull
     private boolean recieveEmails;
+
+    @NotNull
     private boolean trackActivityAcrossApps;
+
+    @NotNull
     private boolean sendLocationInformation;
 
     // Security Preferences
+    @NotNull
     private boolean twoFA;
+
+    @NotNull
     private boolean faceID;
 
     // Notification Preferences
+    @NotNull
     private boolean inboxMessages;
+
+    @NotNull
     private boolean tippingReceiptsOrders;
 
     public Preferences(int preferenceId, boolean personalizedAds, boolean recieveEmails, boolean trackActivityAcrossApps, boolean sendLocationInformation, boolean twoFA, boolean faceID, boolean inboxMessages, boolean tippingReceiptsOrders) {

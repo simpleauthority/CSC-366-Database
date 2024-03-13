@@ -9,15 +9,32 @@ import jakarta.persistence.TemporalType;
 
 import java.util.Date;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotNull;
+
 @Entity
 public class CustomerPersonalInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int customerInfoId;
+
+    @NotNull
+    @Size(min=2, max=50)
     private String name;
+
+    @NotNull
+    @Size(min=10, max=15)
     private String phone;
+
+    @NotNull
+    @Email
     private String email;
+
+    @NotNull
     private String address;
+
+    @NotNull
     @Temporal(value = TemporalType.DATE)
     private Date dateOfBirth;
 

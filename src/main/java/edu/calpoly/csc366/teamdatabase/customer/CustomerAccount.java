@@ -7,6 +7,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import jakarta.persistence.Column;
 
 @Entity
 public class CustomerAccount {
@@ -14,24 +17,32 @@ public class CustomerAccount {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int accountId;
 
+    @NotNull
+    @Size(min=5, max=15)
+    @Column(unique=true)
+    private String username;
+    
+    @NotNull
+    @Column(columnDefinition = "int default 0")
     private int starBalance;
 
+    @NotNull
     @OneToOne
     @JoinColumn(name = "customerInfoId")
     private CustomerPersonalInfo customerInfo;
 
+    @NotNull
     @OneToOne
     @JoinColumn(name = "storeId")
     private Store preferredStore;
 
-
+    @NotNull
     @OneToOne
     @JoinColumn(name = "preferenceId")
     private Preferences preferences;
 
-    public CustomerAccount(int accountId, int starBalance, CustomerPersonalInfo customerInfo, Store preferredStore, Preferences preferences) {
+    public CustomerAccount(int accountId, CustomerPersonalInfo customerInfo, Store preferredStore, Preferences preferences) {
         this.accountId = accountId;
-        this.starBalance = starBalance;
         this.customerInfo = customerInfo;
         this.preferredStore = preferredStore;
         this.preferences = preferences;

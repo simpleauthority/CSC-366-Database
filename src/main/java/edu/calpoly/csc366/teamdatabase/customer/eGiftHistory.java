@@ -11,22 +11,41 @@ import jakarta.persistence.TemporalType;
 
 import java.util.Date;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 @Entity
 public class eGiftHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int giftId;
+
+    @NotNull
     private String recipientName;
+
+    @NotNull
+    @Email
     private String recipientEmail;
-    private int amount;
+
+    @NotNull
+    @Min(1)
+    private float amount;
+
+    @NotNull
     private String message;
+
+    @NotNull
     @Temporal(value = TemporalType.DATE)
     private Date dateSent;
+
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "accountId")
     private CustomerAccount account;
 
-    public eGiftHistory(int giftId, String recipientName, String recipientEmail, int amount, String message, Date dateSent, CustomerAccount account) {
+    public eGiftHistory(int giftId, String recipientName, String recipientEmail, float amount, String message, Date dateSent, CustomerAccount account) {
         this.giftId = giftId;
         this.recipientName = recipientName;
         this.recipientEmail = recipientEmail;
@@ -64,11 +83,11 @@ public class eGiftHistory {
         this.recipientEmail = recipientEmail;
     }
 
-    public int getAmount() {
+    public float getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(float amount) {
         this.amount = amount;
     }
 
