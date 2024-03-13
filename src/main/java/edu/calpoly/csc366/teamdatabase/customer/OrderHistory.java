@@ -16,14 +16,9 @@ import java.util.Date;
 public class OrderHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int offerId;
-    private String offerName;
-    private String description;
+    private int orderId;
     @Temporal(value = TemporalType.DATE)
-    private Date startDate;
-    @Temporal(value = TemporalType.DATE)
-    private Date endDate;
-    private boolean redeemed;
+    private Date date;
     @ManyToOne
     @JoinColumn(name = "accountId")
     private CustomerAccount account;
@@ -31,67 +26,30 @@ public class OrderHistory {
     @JoinColumn(name = "productId")
     private SuppliedProduct product;
 
-    public OrderHistory(int offerId, String offerName, String description, Date startDate, Date endDate, boolean redeemed, CustomerAccount account, SuppliedProduct product) {
-        this.offerId = offerId;
-        this.offerName = offerName;
-        this.description = description;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.redeemed = redeemed;
+    public OrderHistory(int orderId, Date date, CustomerAccount account, SuppliedProduct product) {
+        this.orderId = orderId;
+        this.date = date;
         this.account = account;
         this.product = product;
     }
 
     public OrderHistory() {
-
     }
 
-    public int getOfferId() {
-        return offerId;
+    public int getOrderId() {
+        return orderId;
     }
 
-    public void setOfferId(int offerId) {
-        this.offerId = offerId;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 
-    public String getOfferName() {
-        return offerName;
+    public Date getDate() {
+        return date;
     }
 
-    public void setOfferName(String offerName) {
-        this.offerName = offerName;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-    public boolean isRedeemed() {
-        return redeemed;
-    }
-
-    public void setRedeemed(boolean redeemed) {
-        this.redeemed = redeemed;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public CustomerAccount getAccount() {
