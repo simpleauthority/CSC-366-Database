@@ -12,4 +12,14 @@ public class Role {
     private int roleId;
 
     private String name;
+
+    public Role() {}
+
+    public Role(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 }
