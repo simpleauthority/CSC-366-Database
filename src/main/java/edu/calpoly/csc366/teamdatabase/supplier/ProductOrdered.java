@@ -29,6 +29,48 @@ public class ProductOrdered {
 
     private String quantityUnit;
 
+    public ProductOrdered() {
+    }
+
+    public ProductOrdered(Shipment shipment, SuppliedProduct suppliedProduct, Double quantity, String quantityUnit) {
+        this.shipment = shipment;
+        this.suppliedProduct = suppliedProduct;
+        this.quantity = quantity;
+        this.quantityUnit = quantityUnit;
+    }
+
+    public Shipment getShipment() {
+        return shipment;
+    }
+
+    public void setShipment(Shipment shipment) {
+        this.shipment = shipment;
+    }
+
+    public SuppliedProduct getSuppliedProduct() {
+        return suppliedProduct;
+    }
+
+    public void setSuppliedProduct(SuppliedProduct suppliedProduct) {
+        this.suppliedProduct = suppliedProduct;
+    }
+
+    public Double getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Double quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getQuantityUnit() {
+        return quantityUnit;
+    }
+
+    public void setQuantityUnit(String quantityUnit) {
+        this.quantityUnit = quantityUnit;
+    }
+
     public static class ProductOrderedId implements Serializable {
         private Shipment shipment;
         private SuppliedProduct suppliedProduct;

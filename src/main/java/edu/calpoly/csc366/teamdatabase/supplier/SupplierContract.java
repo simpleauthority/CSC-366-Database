@@ -13,9 +13,8 @@ import jakarta.persistence.UniqueConstraint;
 import java.io.Serializable;
 import java.util.Date;
 
-@Entity                   // this class maps to a database table
+@Entity
 @Table(name = "supplierContract", uniqueConstraints = @UniqueConstraint(columnNames = {"contractName", "supplier", "signDate", "expirationDate"}))
-// (may be omitted for default table naming)
 @IdClass(SupplierContract.SupplierContractId.class)
 public class SupplierContract {
     @Id
@@ -33,6 +32,41 @@ public class SupplierContract {
     @Id
     @Temporal(value = TemporalType.DATE)
     private Date expirationDate;
+
+    public SupplierContract() {
+    }
+
+    public Supplier getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
+    }
+
+    public String getContractName() {
+        return contractName;
+    }
+
+    public void setContractName(String contractName) {
+        this.contractName = contractName;
+    }
+
+    public Date getSignDate() {
+        return signDate;
+    }
+
+    public void setSignDate(Date signDate) {
+        this.signDate = signDate;
+    }
+
+    public Date getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(Date expirationDate) {
+        this.expirationDate = expirationDate;
+    }
 
     public static class SupplierContractId implements Serializable {
         private Supplier supplier;
