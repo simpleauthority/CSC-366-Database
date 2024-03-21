@@ -7,6 +7,7 @@ import edu.calpoly.csc366.teamdatabase.manager.StoreRepository;
 import edu.calpoly.csc366.teamdatabase.supplier.SupplierRepository;
 import edu.calpoly.csc366.teamdatabase.supplier.*;
 import org.checkerframework.checker.units.qual.A;
+import org.checkerframework.checker.units.qual.N;
 import org.hibernate.mapping.Any;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -40,9 +42,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class SupplierTests {
 
     @Autowired
-    private EntityManager entityManager;
-
-    @Autowired
     private SupplierRepository supplierRepository;
     @Autowired
     private ShipmentRepository shipmentRepository;
@@ -54,6 +53,8 @@ public class SupplierTests {
     private ProductOrderedRepository productOrderedRepository;
     @Autowired
     private SuppliedProductRepository suppliedProductRepository;
+    @Autowired
+    private NutritionFactsRepository nutritionFactsRepository;
 
     private Date testDate = Date.from(Instant.now());
 
@@ -67,6 +68,11 @@ public class SupplierTests {
         SuppliedProduct sp2 = new SuppliedProduct("B", "C");
 
         suppliedProductRepository.saveAllAndFlush(List.of(sp1, sp2));
+
+        NutritionFacts n1 = new NutritionFacts("X", 1.0, null, sp1);
+        NutritionFacts n2 = new NutritionFacts("Y", 1.0, null, sp2);
+
+        nutritionFactsRepository.saveAllAndFlush(List.of(n1, n2));
 
         Shipment sh1 = new Shipment(testDate, testDate, testDate, s1,
                 "Delivery Company 1", "A1", 10.0, 10.0, 10.0);
@@ -115,6 +121,12 @@ public class SupplierTests {
         assertEquals(sp.getDescription(), "B");
     }
 
+    @Test
+    public void addNutritionFactWithNonexistentProduct(){
+        SuppliedProduct sp = new SuppliedProduct("C", "D");
+        NutritionFacts n3 = new NutritionFacts("A", 2.0, null, sp);
+        assertThrows(InvalidDataAccessApiUsageException.class, () -> nutritionFactsRepository.saveAndFlush(n3));
+    }
 
 
 
