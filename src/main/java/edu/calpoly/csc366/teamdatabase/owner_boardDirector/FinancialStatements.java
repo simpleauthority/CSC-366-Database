@@ -105,7 +105,8 @@ public class FinancialStatements {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof FinancialStatements that)) return false;
+        if (!(o instanceof FinancialStatements)) return false;
+        FinancialStatements that = (FinancialStatements) o;
         return getStatementID() == that.getStatementID();
     }
 

@@ -105,7 +105,8 @@ public class BoardMember {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof BoardMember that)) return false;
+        if (!(o instanceof BoardMember)) return false;
+        BoardMember that = (BoardMember) o;
         return getBoardMemberID() == that.getBoardMemberID();
     }
 

@@ -82,7 +82,8 @@ public class ShareholderEngagement {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ShareholderEngagement that)) return false;
+        if (!(o instanceof ShareholderEngagement)) return false;
+        ShareholderEngagement that = (ShareholderEngagement) o;
         return getEngagementID() == that.getEngagementID();
     }
 

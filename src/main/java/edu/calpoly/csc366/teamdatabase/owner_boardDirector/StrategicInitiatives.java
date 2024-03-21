@@ -106,7 +106,8 @@ public class StrategicInitiatives {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof StrategicInitiatives that)) return false;
+        if (!(o instanceof StrategicInitiatives)) return false;
+        StrategicInitiatives that = (StrategicInitiatives) o;
         return getStatementID() == that.getStatementID();
     }
 

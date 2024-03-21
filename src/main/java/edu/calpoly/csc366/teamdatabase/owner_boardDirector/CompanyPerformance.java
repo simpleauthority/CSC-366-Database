@@ -79,7 +79,8 @@ public class CompanyPerformance {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof CompanyPerformance that)) return false;
+        if (!(o instanceof CompanyPerformance)) return false;
+        CompanyPerformance that = (CompanyPerformance) o;
         return getPerformanceID() == that.getPerformanceID();
     }
 

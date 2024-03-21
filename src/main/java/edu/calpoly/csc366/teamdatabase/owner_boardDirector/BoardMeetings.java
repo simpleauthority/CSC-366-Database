@@ -96,7 +96,8 @@ public class BoardMeetings {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof BoardMeetings that)) return false;
+        if (!(o instanceof BoardMeetings)) return false;
+        BoardMeetings that = (BoardMeetings) o;
         return getMeetingID() == that.getMeetingID();
     }
 
