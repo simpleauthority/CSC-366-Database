@@ -22,13 +22,17 @@ public class TaxReturn {
     private String country;
     private String region;
     private String type;
+    private Double amountPaid;
+    private String currencyCode; 
 
-    public TaxReturn(int returnId, Date filingDate, String country, String region, String type) {
+    public TaxReturn(int returnId, Date filingDate, String country, String region, String type, Double amountPaid, String currencyCode) {
         this.returnId = returnId;
         this.filingDate = filingDate;
         this.country = country;
         this.region = region;
         this.type = type;
+        this.amountPaid = amountPaid;
+        this.currencyCode = currencyCode;
     }
 
     public TaxReturn() {
@@ -71,6 +75,22 @@ public class TaxReturn {
         this.type = type;
     }
 
+    public Double getAmountPaid() {
+      return amountPaid;
+    }
+
+    public void setAmountPaid(Double amountPaid) {
+      this.amountPaid = amountPaid;
+    }
+
+    public String getCurrencyCode() {
+      return currencyCode;
+    }
+
+    public void setCurrencyCode(String currencyCode) {
+      this.currencyCode = currencyCode;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -80,7 +100,9 @@ public class TaxReturn {
                 && Objects.equals(filingDate, taxReturn.filingDate)
                 && country.equals(taxReturn.country)
                 && region.equals(taxReturn.region)
-                && type.equals(taxReturn.type);
+                && type.equals(taxReturn.type)
+                && amountPaid.equals(taxReturn.amountPaid)
+                && currencyCode.equals(taxReturn.currencyCode);
     }
 
     @Override
@@ -96,6 +118,8 @@ public class TaxReturn {
                 ", country='" + country + '\'' +
                 ", region='" + region + '\'' +
                 ", type='" + type + '\'' +
+                ", amountPaid='" + amountPaid + '\'' +
+                ", currencyCode='" + currencyCode + '\'' +
                 '}';
     }
 }
