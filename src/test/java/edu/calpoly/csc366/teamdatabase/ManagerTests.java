@@ -1,63 +1,112 @@
 package edu.calpoly.csc366.teamdatabase;
 
 
+import edu.calpoly.csc366.teamdatabase.employee.Employee;
+import edu.calpoly.csc366.teamdatabase.employee.Role;
 import edu.calpoly.csc366.teamdatabase.manager.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.TestMethodOrder;
+import edu.calpoly.csc366.teamdatabase.supplier.*;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import edu.calpoly.csc366.teamdatabase.supplier.SuppliedProduct;
 
+import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.logging.Logger;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
-//@TestPropertySource(properties = {
-//        "spring.main.banner-mode=off",
-//        "logging.level.root=ERROR",
-//        "logging.level.csc366=DEBUG",
-//
-//        "logging.level.org.hibernate.SQL=DEBUG",
-//        "logging.level.org.hibernate.type.descriptor.sql.BasicBinder=TRACE", // display prepared statement parameters
-//        "spring.jpa.properties.hibernate.format_sql=true",
-//        "spring.jpa.show-sql=false",   // prevent duplicate logging
-//        "spring.jpa.properties.hibernate.show_sql=false",
-//
-//        "logging.pattern.console= %d{yyyy-MM-dd HH:mm:ss} - %msg%n"
-//})
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@ActiveProfiles("junit")
 public class ManagerTests {
-    private final static Logger log = LoggerFactory.getLogger(ManagerTests.class);
 
     @Autowired
     private ManagerRepository managerRepository;
+    @Autowired
+    private CustomerFeedbackRepository customerFeedbackRepository;
+    @Autowired
+    private EmployeeStatusRepository employeeStatusRepository;
+    @Autowired
+    private StoreRepository storeRepository;
+    @Autowired
+    private InventoryRepository inventoryRepository;
+    @Autowired
+    private MainteanceRepository mainteanceRepository;
+    @Autowired
+    private RegulationsRepository regulationsRepository;
+    @Autowired
+    private RentRepository rentRepository;
+    @Autowired
+    private SalesRepository salesRepository;
+    @Autowired
+    private StoreRegulationRepository storeRegulationRepository;
 
-    Date currentDate = new Date();
+    private Date testDate = Date.from(Instant.now());
     Date newDate = new GregorianCalendar(2025, Calendar.FEBRUARY, 11).getTime();
 
-    private final SuppliedProduct suppliedProduct = new SuppliedProduct("Coffee Beans", "Coffee")
+    private final SuppliedProduct suppliedProduct = new SuppliedProduct("A", "B");
     private final Manager manager = new Manager("test", "test", "test@calpoly.edu", "888-888-8888", "123 Street");
-    private final Store store = new Store("1234 Street", 10, 123456, "Southern California");
-    private final Rent rent = new Rent("Land Fee", "Land tax needed", 1000.00F, currentDate, newDate, "N/A");
-    private final CustomerFeedback customerFeeback = new CustomerFeedback(CustomerFeedback.polarity.POSITIVE, "Great Service!", currentDate);
-    private final EmployeeStatus employeeStatus = new EmployeeStatus(currentDate, newDate);
+    private final Store store1 = new Store("1234 Street", 10, 123456, "Southern California");
+    private final Store store2 = new Store("12345 Street", 10, 123456, "Southern California");
+
+    private final Rent rent = new Rent("Land Fee", "Land tax needed", 1000.00F, testDate, newDate, "N/A");
+    private final CustomerFeedback customerFeeback = new CustomerFeedback(CustomerFeedback.polarity.POSITIVE, "Great Service!", testDate);
+    private final EmployeeStatus employeeStatus = new EmployeeStatus(testDate, newDate);
     private final Inventory inventory = new Inventory(suppliedProduct, 1000, 10);
-    private final Maintenance maintenance = new Maintenance(currentDate, "something", "something", 1000.00F, currentDate, newDate, "N/A");
-    private final Regulations regulations = new Regulations("some regulation", Regulations.Regs.EMPLOYMENT, (java.sql.Date) currentDate, (java.sql.Date) currentDate);
-    private final StoreRegulation storeRegulation = new StoreRegulation((java.sql.Date) currentDate, true);
+    private final Maintenance maintenance = new Maintenance(testDate, "something", "something", 1000.00F, testDate, newDate, "N/A");
+    private final Employee employee = new Employee("Eva Johnson", "5552468135", "eva.johnson@example.org", Date.from(Instant.parse("1980-03-03T00:00:00.00Z")), new Role("cashier"));
     @BeforeEach
     private void setup() {
+        // add 2 store to manager and flush
         managerRepository.saveAndFlush(manager);
-        manager.addStore(store);
+        manager.addStore(store1);
+        manager.addStore(store2);
         managerRepository.saveAndFlush(manager);
+
+        rentRepository.saveAndFlush(rent);
+
+        // add employee to store and flush
+        storeRepository.saveAndFlush(store1);
+
+        // customer feedbacks
+        customerFeedbackRepository.saveAndFlush(customerFeeback);
+        mainteanceRepository.saveAndFlush(maintenance);
+        employeeStatusRepository.saveAndFlush(employeeStatus);
+        inventoryRepository.saveAndFlush(inventory);
     }
 
+    @Test
+    @Order(1)
+    public void testManagerAndAttribute() {
+        Manager m = managerRepository.findByFirstName("test");
+        assertEquals(m.getFirstName(), manager.getFirstName());
+        assertEquals(m.getLastName(), manager.getLastName());
+        assertEquals(m.getEmail(), manager.getEmail());
+        assertEquals(m.getAddress(), manager.getAddress());
+    }
+
+    @Test
+    @Order(2)
+    public void testStoreExist() {
+        Manager m = managerRepository.findByFirstName("test");
+        assertEquals(m.getStore().get(0), store1);
+        assertEquals(m.getStore().get(1), store2);
+    }
+
+    @Test
+    @Order(3)
+    public void testMaintenance() {
+        Manager m = managerRepository.findByFirstName("test");
+        assertEquals(m.getStore().get(0), store1);
+        assertEquals(m.getStore().get(1), store2);
+    }
 }

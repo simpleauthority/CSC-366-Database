@@ -1,14 +1,10 @@
 package edu.calpoly.csc366.teamdatabase.manager;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import edu.calpoly.csc366.teamdatabase.employee.Employee;
+import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -24,7 +20,7 @@ public class Store {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "manager_id", nullable = false)
-    private Manager managerId;
+    private Manager manager;
 
     public Store() {
     }
@@ -76,13 +72,14 @@ public class Store {
         this.region = region;
     }
 
-    public Manager getManagerId() {
-        return managerId;
+    public Manager getManager() {
+        return manager;
     }
 
-    public void setManagerId(Manager managerId) {
-        this.managerId = managerId;
+    public void setManager(Manager manager) {
+        this.manager = manager;
     }
+
 
     // equals and hashCodes
     @Override
@@ -103,7 +100,6 @@ public class Store {
         return "Store{" +
                 "storeId=" + storeId +
                 ", address='" + address + '\'' +
-                ", managerId=" + managerId +
                 ", size=" + size +
                 ", salesTarget=" + salesTarget +
                 ", region='" + region + '\'' +

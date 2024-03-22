@@ -18,7 +18,7 @@ public class Manager {
     private String phoneNumber;
     private String address;
 
-    @OneToMany(mappedBy = "store",       // join column should be in *Address*
+    @OneToMany(mappedBy = "manager",       // join column should be in *Address*
             cascade = CascadeType.ALL, // all JPA actions (persist, remove, refresh, merge, detach) propagate to each address
             orphanRemoval = true,      // address records that are no longer attached to a person are removed
             fetch = FetchType.LAZY)
@@ -39,12 +39,12 @@ public class Manager {
 
     public void addStore(Store s) {
         store.add(s);
-        s.setManagerId(this);
+        s.setManager(this);
     }
 
     public void removeStore(Store s) {
         store.remove(s);
-        s.setManagerId(null);
+        s.setManager(null);
     }
     public List<Store> getStore() {
         return this.store;
