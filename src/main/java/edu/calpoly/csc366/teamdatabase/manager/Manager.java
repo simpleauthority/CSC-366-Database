@@ -1,14 +1,9 @@
 package edu.calpoly.csc366.teamdatabase.manager;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -22,21 +17,37 @@ public class Manager {
     private String email;
     private String phoneNumber;
     private String address;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "storeId", nullable = false)
-    private Store store;
+
+    @OneToMany(mappedBy = "store",       // join column should be in *Address*
+            cascade = CascadeType.ALL, // all JPA actions (persist, remove, refresh, merge, detach) propagate to each address
+            orphanRemoval = true,      // address records that are no longer attached to a person are removed
+            fetch = FetchType.LAZY)
+    //@OrderColumn(name = "list_idx")
+    private List<Store> store = new ArrayList<>();
 
     public Manager() {
 
     }
 
     public Manager(String firstName, String lastName, String email, String phoneNumber, String address) {
-        this.managerId = managerId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.address = address;
+    }
+
+    public void addStore(Store s) {
+        store.add(s);
+        s.setManagerId(this);
+    }
+
+    public void removeStore(Store s) {
+        store.remove(s);
+        s.setManagerId(null);
+    }
+    public List<Store> getStore() {
+        return this.store;
     }
 
     public int getManagerId() {

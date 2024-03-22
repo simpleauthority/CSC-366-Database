@@ -76,6 +76,14 @@ public class Store {
         this.region = region;
     }
 
+    public Manager getManagerId() {
+        return managerId;
+    }
+
+    public void setManagerId(Manager managerId) {
+        this.managerId = managerId;
+    }
+
     // equals and hashCodes
     @Override
     public boolean equals(Object o) {
